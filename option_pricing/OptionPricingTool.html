@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>optionpricingtool</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="OptionPricingTool_files/libs/clipboard/clipboard.min.js"></script>
+<script src="OptionPricingTool_files/libs/quarto-html/quarto.js"></script>
+<script src="OptionPricingTool_files/libs/quarto-html/popper.min.js"></script>
+<script src="OptionPricingTool_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="OptionPricingTool_files/libs/quarto-html/anchor.min.js"></script>
+<link href="OptionPricingTool_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="OptionPricingTool_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="OptionPricingTool_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="OptionPricingTool_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="OptionPricingTool_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="options-pricing-tool" class="level1">
+<h1>Options Pricing Tool</h1>
+<p>A comprehensive Python library for options pricing, Greeks calculation, and strategy analysis using functional programming principles.</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This tool provides a robust framework for pricing options using various models, calculating Greeks, analyzing option strategies, and visualizing results. It’s designed with a functional programming approach for flexibility and composability.</p>
+</section>
+<section id="features" class="level2">
+<h2 class="anchored" data-anchor-id="features">Features</h2>
+<section id="pricing-models" class="level3">
+<h3 class="anchored" data-anchor-id="pricing-models">Pricing Models</h3>
+<ul>
+<li>Black-Scholes-Merton model for European options</li>
+<li>Binomial tree model for American and European options</li>
+<li>Monte Carlo simulation for standard and path-dependent options</li>
+<li>Advanced models:
+<ul>
+<li>Heston stochastic volatility model</li>
+<li>Merton jump-diffusion model</li>
+<li>CEV (Constant Elasticity of Variance) model</li>
+<li>SABR (Stochastic Alpha Beta Rho) model</li>
+</ul></li>
+</ul>
+</section>
+<section id="greeks-calculation" class="level3">
+<h3 class="anchored" data-anchor-id="greeks-calculation">Greeks Calculation</h3>
+<ul>
+<li>Delta (<span class="math inline">\(\frac{\partial V}{\partial S}\)</span>): price sensitivity to underlying changes</li>
+<li>Gamma (<span class="math inline">\(\frac{\partial^2 V}{\partial S^2}\)</span>): delta sensitivity to underlying changes</li>
+<li>Theta (<span class="math inline">\(\frac{\partial V}{\partial t}\)</span>): price sensitivity to time decay</li>
+<li>Vega (<span class="math inline">\(\frac{\partial V}{\partial \sigma}\)</span>): price sensitivity to volatility changes</li>
+<li>Rho (<span class="math inline">\(\frac{\partial V}{\partial r}\)</span>): price sensitivity to interest rate changes</li>
+</ul>
+</section>
+<section id="visualization-tools" class="level3">
+<h3 class="anchored" data-anchor-id="visualization-tools">Visualization Tools</h3>
+<ul>
+<li>Option prices vs.&nbsp;underlying price</li>
+<li>Greeks profiles across strike prices</li>
+<li>3D option price surfaces (price vs.&nbsp;strike vs.&nbsp;time)</li>
+<li>Volatility smile/skew visualizations</li>
+<li>Monte Carlo simulation convergence analysis</li>
+<li>Model comparison charts</li>
+</ul>
+</section>
+<section id="options-strategy-builder" class="level3">
+<h3 class="anchored" data-anchor-id="options-strategy-builder">Options Strategy Builder</h3>
+<ul>
+<li>Create and analyze custom multi-leg option strategies</li>
+<li>Built-in templates for common strategies:
+<ul>
+<li>Covered calls and protective puts</li>
+<li>Vertical spreads (bull/bear call/put spreads)</li>
+<li>Straddles and strangles</li>
+<li>Butterflies and condors</li>
+</ul></li>
+<li>Profit/loss profiles at expiration</li>
+<li>Break-even points calculation</li>
+<li>Combined Greeks analysis for strategies</li>
+</ul>
+</section>
+<section id="additional-tools" class="level3">
+<h3 class="anchored" data-anchor-id="additional-tools">Additional Tools</h3>
+<ul>
+<li>Implied volatility calculation from market prices</li>
+<li>American vs.&nbsp;European option comparison</li>
+<li>Pricing model accuracy comparison</li>
+</ul>
+</section>
+</section>
+<section id="installation" class="level2">
+<h2 class="anchored" data-anchor-id="installation">Installation</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dependencies</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install numpy matplotlib scipy pandas seaborn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="usage-examples" class="level2">
+<h2 class="anchored" data-anchor-id="usage-examples">Usage Examples</h2>
+<section id="basic-option-pricing" class="level3">
+<h3 class="anchored" data-anchor-id="basic-option-pricing">Basic Option Pricing</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the library</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> options_pricing <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameters</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> <span class="fl">100.0</span>     <span class="co"># Current stock price</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="fl">100.0</span>     <span class="co"># Strike price</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> <span class="fl">0.05</span>      <span class="co"># Risk-free rate</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>sigma <span class="op">=</span> <span class="fl">0.2</span>   <span class="co"># Volatility</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="fl">1.0</span>       <span class="co"># Time to expiration (1 year)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Price a European call option using Black-Scholes</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>call_price <span class="op">=</span> bsm_call_price(S, K, r, sigma, T)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Call option price: </span><span class="sc">{</span>call_price<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Price a European put option</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>put_price <span class="op">=</span> bsm_put_price(S, K, r, sigma, T)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Put option price: </span><span class="sc">{</span>put_price<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Greeks</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>call_delta <span class="op">=</span> delta_call(S, K, r, sigma, T)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>gamma_value <span class="op">=</span> gamma(S, K, r, sigma, T)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Call delta: </span><span class="sc">{</span>call_delta<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Gamma: </span><span class="sc">{</span>gamma_value<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="american-options-with-binomial-tree" class="level3">
+<h3 class="anchored" data-anchor-id="american-options-with-binomial-tree">American Options with Binomial Tree</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Price an American put option using binomial tree</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>am_put_price <span class="op">=</span> binomial_tree_option(S, K, r, sigma, T, steps<span class="op">=</span><span class="dv">100</span>, option_type<span class="op">=</span><span class="st">'put'</span>, exercise<span class="op">=</span><span class="st">'american'</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"American put option price: </span><span class="sc">{</span>am_put_price<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with European put</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>eu_put_price <span class="op">=</span> binomial_tree_option(S, K, r, sigma, T, steps<span class="op">=</span><span class="dv">100</span>, option_type<span class="op">=</span><span class="st">'put'</span>, exercise<span class="op">=</span><span class="st">'european'</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"European put option price: </span><span class="sc">{</span>eu_put_price<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="option-strategy-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="option-strategy-analysis">Option Strategy Analysis</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a bull call spread strategy</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bull_spread <span class="op">=</span> OptionStrategy(S, r, sigma, T)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>bull_spread.add_position(<span class="st">'call'</span>, <span class="dv">95</span>, <span class="dv">1</span>)   <span class="co"># Buy lower strike call</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>bull_spread.add_position(<span class="st">'call'</span>, <span class="dv">105</span>, <span class="op">-</span><span class="dv">1</span>)  <span class="co"># Sell higher strike call</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyze the strategy</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>S_range <span class="op">=</span> np.linspace(<span class="dv">80</span>, <span class="dv">120</span>, <span class="dv">100</span>)  <span class="co"># Range of stock prices to analyze</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>result, metrics <span class="op">=</span> bull_spread.analyze_strategy(S_range, plot<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Display key metrics</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Strategy premium: $</span><span class="sc">{</span>metrics[<span class="st">'Total Premium'</span>]<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Max profit: $</span><span class="sc">{</span>metrics[<span class="st">'Max Profit'</span>]<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Max loss: $</span><span class="sc">{</span>metrics[<span class="st">'Max Loss'</span>]<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Break-even points: </span><span class="sc">{</span>[<span class="ss">f'$</span><span class="sc">{</span>be<span class="sc">:.2f}</span><span class="ss">'</span> <span class="cf">for</span> be <span class="kw">in</span> metrics[<span class="st">'Break-even Points'</span>]]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="visualization" class="level3">
+<h3 class="anchored" data-anchor-id="visualization">Visualization</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot option price vs stock price</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>S_range <span class="op">=</span> np.linspace(<span class="dv">50</span>, <span class="dv">150</span>, <span class="dv">100</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plot_option_price_vs_spot(S_range, K, r, sigma, T)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Greeks</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plot_greeks_vs_spot(S_range, K, r, sigma, T, option_type<span class="op">=</span><span class="st">'call'</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3D price surface</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>T_range <span class="op">=</span> np.linspace(<span class="fl">0.1</span>, <span class="dv">2</span>, <span class="dv">50</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plot_3d_option_surface(bsm_call_price, S_range, T_range, K, r, sigma, <span class="st">'call'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="advanced-models" class="level3">
+<h3 class="anchored" data-anchor-id="advanced-models">Advanced Models</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Heston model for stochastic volatility</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>kappa <span class="op">=</span> <span class="fl">2.0</span>      <span class="co"># Mean reversion speed</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> <span class="fl">0.04</span>     <span class="co"># Long-term variance</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>vol_of_vol <span class="op">=</span> <span class="fl">0.3</span>  <span class="co"># Volatility of variance</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>rho <span class="op">=</span> <span class="op">-</span><span class="fl">0.7</span>        <span class="co"># Correlation</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>v0 <span class="op">=</span> <span class="fl">0.04</span>         <span class="co"># Initial variance</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>heston_price, _ <span class="op">=</span> heston_model_option(S, K, r, T, kappa, theta, vol_of_vol, rho, v0, </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                                      simulations<span class="op">=</span><span class="dv">5000</span>, steps<span class="op">=</span><span class="dv">100</span>, option_type<span class="op">=</span><span class="st">'call'</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Heston model call price: </span><span class="sc">{</span>heston_price<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Merton jump-diffusion model</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> <span class="fl">1.0</span>    <span class="co"># Jump intensity (avg number of jumps per year)</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>mu_j <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span>  <span class="co"># Mean jump size</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>sigma_j <span class="op">=</span> <span class="fl">0.2</span>  <span class="co"># Jump size volatility</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>jump_price <span class="op">=</span> merton_jump_diffusion(S, K, r, sigma, T, lam, mu_j, sigma_j, <span class="st">'call'</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Jump-diffusion model call price: </span><span class="sc">{</span>jump_price<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="running-demonstrations" class="level2">
+<h2 class="anchored" data-anchor-id="running-demonstrations">Running Demonstrations</h2>
+<p>The tool includes two comprehensive demonstration functions:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Demonstrate core options pricing and Greeks</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>demonstrate_options_pricing()</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Demonstrate option strategies</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>demonstrate_option_strategies()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="function-reference" class="level2">
+<h2 class="anchored" data-anchor-id="function-reference">Function Reference</h2>
+<section id="core-pricing-functions" class="level3">
+<h3 class="anchored" data-anchor-id="core-pricing-functions">Core Pricing Functions</h3>
+<ul>
+<li><code>bsm_call_price(S, K, r, sigma, T)</code> - Black-Scholes-Merton call price</li>
+<li><code>bsm_put_price(S, K, r, sigma, T)</code> - Black-Scholes-Merton put price</li>
+<li><code>binomial_tree_option(S, K, r, sigma, T, steps, option_type, exercise)</code> - Binomial tree model</li>
+<li><code>monte_carlo_option(S, K, r, sigma, T, simulations, option_type)</code> - Monte Carlo simulation</li>
+<li><code>heston_model_option(S, K, r, T, kappa, theta, sigma, rho, v0, simulations, steps, option_type)</code> - Heston model</li>
+<li><code>merton_jump_diffusion(S, K, r, sigma, T, lam, mu_j, sigma_j, option_type, simulations)</code> - Jump diffusion model</li>
+<li><code>cev_model_option(S, K, r, beta, sigma, T, option_type, simulations, steps)</code> - CEV model</li>
+<li><code>sabr_implied_vol(F, K, T, alpha, beta, rho, volvol)</code> - SABR model for implied volatility</li>
+</ul>
+</section>
+<section id="greeks-functions" class="level3">
+<h3 class="anchored" data-anchor-id="greeks-functions">Greeks Functions</h3>
+<ul>
+<li><code>delta_call(S, K, r, sigma, T)</code> - Call option delta (<span class="math inline">\(\Delta_{\text{call}}\)</span>)</li>
+<li><code>delta_put(S, K, r, sigma, T)</code> - Put option delta (<span class="math inline">\(\Delta_{\text{put}}\)</span>)</li>
+<li><code>gamma(S, K, r, sigma, T)</code> - Gamma (<span class="math inline">\(\Gamma\)</span>, same for calls and puts)</li>
+<li><code>theta_call(S, K, r, sigma, T)</code> - Call option theta (<span class="math inline">\(\Theta_{\text{call}}\)</span>)</li>
+<li><code>theta_put(S, K, r, sigma, T)</code> - Put option theta (<span class="math inline">\(\Theta_{\text{put}}\)</span>)</li>
+<li><code>vega(S, K, r, sigma, T)</code> - Vega (<span class="math inline">\(\mathcal{V}\)</span>, same for calls and puts)</li>
+<li><code>rho_call(S, K, r, sigma, T)</code> - Call option rho (<span class="math inline">\(\rho_{\text{call}}\)</span>)</li>
+<li><code>rho_put(S, K, r, sigma, T)</code> - Put option rho (<span class="math inline">\(\rho_{\text{put}}\)</span>)</li>
+</ul>
+</section>
+<section id="visualization-functions" class="level3">
+<h3 class="anchored" data-anchor-id="visualization-functions">Visualization Functions</h3>
+<ul>
+<li><code>plot_option_price_vs_spot(S_range, K, r, sigma, T, option_types)</code> - Plot option prices vs stock price</li>
+<li><code>plot_greeks_vs_spot(S_range, K, r, sigma, T, option_type)</code> - Plot option Greeks vs stock price</li>
+<li><code>plot_3d_option_surface(option_pricer, S_range, T_range, K, r, sigma, option_type)</code> - 3D option price surface</li>
+<li><code>plot_volatility_smile(strikes, market_prices, S, r, T, option_type)</code> - Plot volatility smile from market prices</li>
+<li><code>plot_binomial_vs_bsm(S, K, r, sigma, T, option_type, exercise, max_steps)</code> - Compare binomial and BSM prices</li>
+<li><code>plot_monte_carlo_convergence(S, K, r, sigma, T, option_type, max_sims, steps)</code> - Plot Monte Carlo convergence</li>
+<li><code>plot_heston_paths(S, K, r, T, kappa, theta, sigma, rho, v0, simulations, steps)</code> - Plot Heston model paths</li>
+<li><code>compare_pricing_models(S, K, r, sigma, T, option_type)</code> - Compare different pricing models</li>
+<li><code>plot_sabr_vol_surface(F_range, K_range, T_range, alpha, beta, rho, volvol)</code> - Plot SABR vol surface</li>
+</ul>
+</section>
+<section id="strategy-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="strategy-analysis">Strategy Analysis</h3>
+<ul>
+<li><code>OptionStrategy</code> class - Create and analyze option strategies
+<ul>
+<li><code>add_position(option_type, K, quantity, premium)</code> - Add option position</li>
+<li><code>analyze_strategy(S_range, plot)</code> - Analyze strategy payoff and Greeks</li>
+<li>Various helper methods for calculations and plotting</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="mathematical-foundation" class="level2">
+<h2 class="anchored" data-anchor-id="mathematical-foundation">Mathematical Foundation</h2>
+<p>The tool implements the following mathematical models:</p>
+<section id="black-scholes-merton-model" class="level3">
+<h3 class="anchored" data-anchor-id="black-scholes-merton-model">Black-Scholes-Merton Model</h3>
+<ul>
+<li>Call price: <span class="math inline">\(C = S \cdot N(d_1) - K \cdot e^{-rT} \cdot N(d_2)\)</span></li>
+<li>Put price: <span class="math inline">\(P = K \cdot e^{-rT} \cdot N(-d_2) - S \cdot N(-d_1)\)</span></li>
+<li>Where:
+<ul>
+<li><span class="math inline">\(d_1 = \frac{\ln(S/K) + (r + \sigma^2/2) \cdot T}{\sigma \cdot \sqrt{T}}\)</span></li>
+<li><span class="math inline">\(d_2 = d_1 - \sigma \cdot \sqrt{T}\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="binomial-tree-model" class="level3">
+<h3 class="anchored" data-anchor-id="binomial-tree-model">Binomial Tree Model</h3>
+<ul>
+<li>Uses risk-neutral valuation with discrete time steps</li>
+<li>Allows for early exercise (American options)</li>
+<li>Up factor: <span class="math inline">\(u = e^{\sigma\sqrt{\Delta t}}\)</span></li>
+<li>Down factor: <span class="math inline">\(d = e^{-\sigma\sqrt{\Delta t}}\)</span></li>
+<li>Risk-neutral probability: <span class="math inline">\(p = \frac{e^{r\Delta t} - d}{u - d}\)</span></li>
+</ul>
+</section>
+<section id="greeks-formulas" class="level3">
+<h3 class="anchored" data-anchor-id="greeks-formulas">Greeks Formulas</h3>
+<ul>
+<li><strong>Delta</strong> (<span class="math inline">\(\Delta\)</span>):
+<ul>
+<li>Call: <span class="math inline">\(\Delta_{\text{call}} = N(d_1)\)</span></li>
+<li>Put: <span class="math inline">\(\Delta_{\text{put}} = N(d_1) - 1\)</span></li>
+</ul></li>
+<li><strong>Gamma</strong> (<span class="math inline">\(\Gamma\)</span>):
+<ul>
+<li><span class="math inline">\(\Gamma = \frac{N'(d_1)}{S \cdot \sigma \cdot \sqrt{T}}\)</span></li>
+</ul></li>
+<li><strong>Theta</strong> (<span class="math inline">\(\Theta\)</span>):
+<ul>
+<li>Call: <span class="math inline">\(\Theta_{\text{call}} = -\frac{S \cdot \sigma \cdot N'(d_1)}{2 \cdot \sqrt{T}} - r \cdot K \cdot e^{-rT} \cdot N(d_2)\)</span></li>
+<li>Put: <span class="math inline">\(\Theta_{\text{put}} = -\frac{S \cdot \sigma \cdot N'(d_1)}{2 \cdot \sqrt{T}} + r \cdot K \cdot e^{-rT} \cdot N(-d_2)\)</span></li>
+</ul></li>
+<li><strong>Vega</strong> (<span class="math inline">\(\mathcal{V}\)</span>):
+<ul>
+<li><span class="math inline">\(\mathcal{V} = S \cdot \sqrt{T} \cdot N'(d_1)\)</span></li>
+</ul></li>
+<li><strong>Rho</strong> (<span class="math inline">\(\rho\)</span>):
+<ul>
+<li>Call: <span class="math inline">\(\rho_{\text{call}} = K \cdot T \cdot e^{-rT} \cdot N(d_2)\)</span></li>
+<li>Put: <span class="math inline">\(\rho_{\text{put}} = -K \cdot T \cdot e^{-rT} \cdot N(-d_2)\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="heston-model" class="level3">
+<h3 class="anchored" data-anchor-id="heston-model">Heston Model</h3>
+<ul>
+<li>Stock price:<br>
+<span class="math inline">\(dS_t = \mu S_t dt + \sqrt{v_t} S_t dW^S_t\)</span></li>
+<li>Variance:<br>
+<span class="math inline">\(dv_t = \kappa(\theta - v_t)dt + \sigma_v \sqrt{v_t}dW^v_t\)</span></li>
+<li>With correlation:<br>
+<span class="math inline">\(\text{Corr}(dW^S_t, dW^v_t) = \rho\)</span></li>
+</ul>
+</section>
+<section id="merton-jump-diffusion-model" class="level3">
+<h3 class="anchored" data-anchor-id="merton-jump-diffusion-model">Merton Jump-Diffusion Model</h3>
+<ul>
+<li>Stock price:<br>
+<span class="math inline">\(dS_t = (\mu - \lambda k)S_t dt + \sigma S_t dW_t + S_t dJ_t\)</span></li>
+<li>Jump component: <span class="math inline">\(dJ_t\)</span> is a compound Poisson process with intensity <span class="math inline">\(\lambda\)</span></li>
+<li>Jump sizes: <span class="math inline">\((Y_i - 1)\)</span> are i.i.d. with expected value <span class="math inline">\(k = E[Y - 1]\)</span></li>
+</ul>
+</section>
+</section>
+<section id="contributing-commenting" class="level2">
+<h2 class="anchored" data-anchor-id="contributing-commenting">Contributing / Commenting</h2>
+<p>Contributions and comments are welcome!</p>
+</section>
+<section id="license" class="level2">
+<h2 class="anchored" data-anchor-id="license">License</h2>
+<p>This project is available under the MIT License.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

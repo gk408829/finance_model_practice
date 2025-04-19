@@ -9,6 +9,7 @@ This tool provides a robust framework for pricing options using various models, 
 ## Features
 
 ### Pricing Models
+
 - Black-Scholes-Merton model for European options
 - Binomial tree model for American and European options
 - Monte Carlo simulation for standard and path-dependent options
@@ -19,6 +20,7 @@ This tool provides a robust framework for pricing options using various models, 
   - SABR (Stochastic Alpha Beta Rho) model
 
 ### Greeks Calculation
+
 - Delta ($\frac{\partial V}{\partial S}$): price sensitivity to underlying changes
 - Gamma ($\frac{\partial^2 V}{\partial S^2}$): delta sensitivity to underlying changes
 - Theta ($\frac{\partial V}{\partial t}$): price sensitivity to time decay
@@ -26,6 +28,7 @@ This tool provides a robust framework for pricing options using various models, 
 - Rho ($\frac{\partial V}{\partial r}$): price sensitivity to interest rate changes
 
 ### Visualization Tools
+
 - Option prices vs. underlying price
 - Greeks profiles across strike prices
 - 3D option price surfaces (price vs. strike vs. time)
@@ -34,6 +37,7 @@ This tool provides a robust framework for pricing options using various models, 
 - Model comparison charts
 
 ### Options Strategy Builder
+
 - Create and analyze custom multi-leg option strategies
 - Built-in templates for common strategies:
   - Covered calls and protective puts
@@ -45,6 +49,7 @@ This tool provides a robust framework for pricing options using various models, 
 - Combined Greeks analysis for strategies
 
 ### Additional Tools
+
 - Implied volatility calculation from market prices
 - American vs. European option comparison
 - Pricing model accuracy comparison
@@ -170,6 +175,7 @@ demonstrate_option_strategies()
 ## Function Reference
 
 ### Core Pricing Functions
+
 - `bsm_call_price(S, K, r, sigma, T)` - Black-Scholes-Merton call price
 - `bsm_put_price(S, K, r, sigma, T)` - Black-Scholes-Merton put price
 - `binomial_tree_option(S, K, r, sigma, T, steps, option_type, exercise)` - Binomial tree model
@@ -180,6 +186,7 @@ demonstrate_option_strategies()
 - `sabr_implied_vol(F, K, T, alpha, beta, rho, volvol)` - SABR model for implied volatility
 
 ### Greeks Functions
+
 - `delta_call(S, K, r, sigma, T)` - Call option delta ($\Delta_{\text{call}}$)
 - `delta_put(S, K, r, sigma, T)` - Put option delta ($\Delta_{\text{put}}$)
 - `gamma(S, K, r, sigma, T)` - Gamma ($\Gamma$, same for calls and puts)
@@ -190,6 +197,7 @@ demonstrate_option_strategies()
 - `rho_put(S, K, r, sigma, T)` - Put option rho ($\rho_{\text{put}}$)
 
 ### Visualization Functions
+
 - `plot_option_price_vs_spot(S_range, K, r, sigma, T, option_types)` - Plot option prices vs stock price
 - `plot_greeks_vs_spot(S_range, K, r, sigma, T, option_type)` - Plot option Greeks vs stock price
 - `plot_3d_option_surface(option_pricer, S_range, T_range, K, r, sigma, option_type)` - 3D option price surface
@@ -201,6 +209,7 @@ demonstrate_option_strategies()
 - `plot_sabr_vol_surface(F_range, K_range, T_range, alpha, beta, rho, volvol)` - Plot SABR vol surface
 
 ### Strategy Analysis
+
 - `OptionStrategy` class - Create and analyze option strategies
   - `add_position(option_type, K, quantity, premium)` - Add option position
   - `analyze_strategy(S_range, plot)` - Analyze strategy payoff and Greeks
@@ -211,6 +220,7 @@ demonstrate_option_strategies()
 The tool implements the following mathematical models:
 
 ### Black-Scholes-Merton Model
+
 - Call price: $C = S \cdot N(d_1) - K \cdot e^{-rT} \cdot N(d_2)$
 - Put price: $P = K \cdot e^{-rT} \cdot N(-d_2) - S \cdot N(-d_1)$
 - Where:
@@ -218,6 +228,7 @@ The tool implements the following mathematical models:
   - $d_2 = d_1 - \sigma \cdot \sqrt{T}$
 
 ### Binomial Tree Model
+
 - Uses risk-neutral valuation with discrete time steps
 - Allows for early exercise (American options)
 - Up factor: $u = e^{\sigma\sqrt{\Delta t}}$
@@ -225,6 +236,7 @@ The tool implements the following mathematical models:
 - Risk-neutral probability: $p = \frac{e^{r\Delta t} - d}{u - d}$
 
 ### Greeks Formulas
+
 - **Delta** ($\Delta$): 
   - Call: $\Delta_{\text{call}} = N(d_1)$
   - Put: $\Delta_{\text{put}} = N(d_1) - 1$
@@ -240,6 +252,7 @@ The tool implements the following mathematical models:
   - Put: $\rho_{\text{put}} = -K \cdot T \cdot e^{-rT} \cdot N(-d_2)$
 
 ### Heston Model
+
 - Stock price:  
     $dS_t = \mu S_t dt + \sqrt{v_t} S_t dW^S_t$
 - Variance:  
@@ -248,6 +261,7 @@ The tool implements the following mathematical models:
     $\text{Corr}(dW^S_t, dW^v_t) = \rho$
 
 ### Merton Jump-Diffusion Model
+
 - Stock price:  
     $dS_t = (\mu - \lambda k)S_t dt + \sigma S_t dW_t + S_t dJ_t$
 - Jump component: $dJ_t$ is a compound Poisson process with intensity $\lambda$

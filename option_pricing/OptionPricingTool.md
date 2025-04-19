@@ -237,17 +237,17 @@ The tool implements the following mathematical models:
 
 ### Greeks Formulas
 
-- **Delta** ($\Delta$): 
+- **Delta** ($\Delta$):  
   - Call: $\Delta_{\text{call}} = N(d_1)$
   - Put: $\Delta_{\text{put}} = N(d_1) - 1$
 - **Gamma** ($\Gamma$):  
   - $\Gamma = \frac{N'(d_1)}{S \cdot \sigma \cdot \sqrt{T}}$
-- **Theta** ($\Theta$): 
+- **Theta** ($\Theta$):  
   - Call: $\Theta_{\text{call}} = -\frac{S \cdot \sigma \cdot N'(d_1)}{2 \cdot \sqrt{T}} - r \cdot K \cdot e^{-rT} \cdot N(d_2)$
   - Put: $\Theta_{\text{put}} = -\frac{S \cdot \sigma \cdot N'(d_1)}{2 \cdot \sqrt{T}} + r \cdot K \cdot e^{-rT} \cdot N(-d_2)$
 - **Vega** ($\mathcal{V}$):  
   - $\mathcal{V} = S \cdot \sqrt{T} \cdot N'(d_1)$
-- **Rho** ($\rho$): 
+- **Rho** ($\rho$):  
   - Call: $\rho_{\text{call}} = K \cdot T \cdot e^{-rT} \cdot N(d_2)$
   - Put: $\rho_{\text{put}} = -K \cdot T \cdot e^{-rT} \cdot N(-d_2)$
 
@@ -269,7 +269,7 @@ The tool implements the following mathematical models:
 
 ## Contributing / Commenting
 
-Contributions and comments are welcome! 
+Contributions and comments are welcome!
 
 ## License
 
